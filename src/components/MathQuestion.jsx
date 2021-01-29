@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      if (value === '2' || value === 'True' || value == 7) {
+      if (value === '2' || value === 'True' || value === 7) {
         counter++;
         setHelperText("Correct. Your score is " + (counter) + "/3 (" + (counter/3*100).toFixed(2) + "%)");
         setError(false);

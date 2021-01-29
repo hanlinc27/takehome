@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      if (value === 'True' || value === 'Dangling participle' || value == 'their') {
+      if (value === 'True' || value === 'Dangling participle' || value === 'their') {
         counter++;
         setHelperText("Correct. Your score is " + (counter) + "/3 (" + (counter/3*100).toFixed(2) + "%)");
         setError(false);
