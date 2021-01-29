@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Title } from "../components/Title";
 import axios from 'axios';
 import { useEffect } from 'react';
-import { Question } from '../components/Question';
-
+import { EnglishQuestion } from '../components/EnglishQuestion';
+import { StyledReturn } from '../pages/MathQuiz';
 export function EnglishQuiz() {
     const [questions, setQuestions] = useState(0);
     const [title, setTitle] = useState(0);
@@ -20,13 +20,16 @@ export function EnglishQuiz() {
     }, []);
             return (
                 <>
+                <StyledReturn href="/">Return Home</StyledReturn>
                 <Title name={title}></Title>
                   {Object.keys(questions).map((key, i) => {
                       return(
-                      <Question 
+                      <EnglishQuestion 
                       key={i}
                       number={i+1} 
-                      name={questions[key].text} ></Question>
+                      name={questions[key].text} 
+                      options = {questions[key].options}
+                      ></EnglishQuestion>
                       );
                       
                   })}
