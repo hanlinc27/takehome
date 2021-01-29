@@ -43,62 +43,65 @@ const StyledButton = styled.button`
 `;
 
 const useStyles = makeStyles((theme) => ({
-    formControl:{
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '24px',
-        lineHeight: '29px',
-        color: '#2F3546',
-        paddingBottom: '1%',
-    },
-    optionLabel: {
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '18px',
-        lineHeight: '22px',
-        color: '#2F3546',
-        marginLeft: '35%',
-        display: 'inline-block',
-    },
-    helperText:{
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '24px',
-        lineHeight: '29px',
-        color: '#6BC6BF',
-    },
-  }));
+  formControl: {
+    fontFamily: 'Inter',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '24px',
+    lineHeight: '29px',
+    color: '#2F3546',
+    paddingBottom: '1%',
+  },
+  optionLabel: {
+    fontFamily: 'Inter',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    lineHeight: '22px',
+    color: '#2F3546',
+    marginLeft: '35%',
+    display: 'inline-block',
+  },
+  helperText: {
+    fontFamily: 'Inter',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '24px',
+    lineHeight: '29px',
+    color: '#6BC6BF',
+  },
+}));
 
-  export function MathQuestion(props) {
-    const classes = useStyles();
-    var options = props.options;
-    const [value, setValue] = React.useState('');
-    const [error, setError] = React.useState(false);
-    const [helperText, setHelperText] = React.useState('');
-    
-    const handleRadioChange = (event) => {
-      setValue(event.target.value);
-      setHelperText(' ');
-      setError(false);
-    };
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      if (value === '2' || value === 'True' || value === 7) {
-        counter++;
-        setHelperText("Correct. Your score is " + (counter) + "/3 (" + (counter/3*100).toFixed(2) + "%)");
-        setError(false);
-      } else {
-        setHelperText('Incorrect');
-        setError(true);
+export function MathQuestion(props) {
+  const classes = useStyles();
+  var options = props.options;
+  const [value, setValue] = React.useState('');
+  const [error, setError] = React.useState(false);
+  const [helperText, setHelperText] = React.useState('');
+
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+    setHelperText(' ');
+    setError(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (value === '2' || value === 'True' || value === '7') {
+      counter++;
+      if (counter >= 3){
+        counter = 3;
       }
-    };
+      setHelperText("Correct. Your score is " + (counter) + "/3 (" + (counter / 3 * 100).toFixed(2) + "%)");
+      setError(false);
+    } else {
+      setHelperText('Incorrect');
+      setError(true);
+    }
+  };
 
-    return (
-        <StyledGrid>
+  return (
+    <StyledGrid>
       <form onSubmit={handleSubmit}>
         <FormControl component="fieldset" error={error} className={classes.formControl}>
           <FormLabel component="question-label" className={classes.formControl}>{props.number}. {props.name} </FormLabel>
@@ -106,21 +109,21 @@ const useStyles = makeStyles((theme) => ({
 
           <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
             {Object.keys(options).map((key) => {
-               return (
-                   <>       
-                    <StyledFormControlLabel value={options[key]}  control={<Radio />} label={options[key]} />
+              return (
+                <>
+                  <StyledFormControlLabel value={options[key]} control={<Radio />} label={options[key]} />
                 </>
-               );
-           })
-       }
+              );
+            })
+            }
           </RadioGroup>
         </FormControl>
         <StyledButton type="submit" variant="outlined" color="primary">
-        Submit
+          Submit
         </StyledButton>
       </form>
       <br></br>
-      </StyledGrid>
-    );
-  }
+    </StyledGrid>
+  );
+}
 

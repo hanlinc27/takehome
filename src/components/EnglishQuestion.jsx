@@ -42,7 +42,7 @@ const StyledButton = styled.button`
 `;
 
 const useStyles = makeStyles((theme) => ({
-    formControl:{
+    formControl: {
         fontFamily: 'Inter',
         fontStyle: 'normal',
         fontWeight: 'bold',
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '35%',
         display: 'inline-block',
     },
-    helperText:{
+    helperText: {
         fontFamily: 'Inter',
         fontStyle: 'normal',
         fontWeight: 'bold',
@@ -69,57 +69,57 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: '29px',
         color: '#6BC6BF',
     },
-  }));
+}));
 
-  export function EnglishQuestion(props) {
+export function EnglishQuestion(props) {
     const classes = useStyles();
     var options = props.options;
     const [value, setValue] = React.useState('');
     const [error, setError] = React.useState(false);
     const [helperText, setHelperText] = React.useState('');
-    
+
     const handleRadioChange = (event) => {
-      setValue(event.target.value);
-      setHelperText(' ');
-      setError(false);
-    };
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      if (value === 'True' || value === 'Dangling participle' || value === 'their') {
-        counter++;
-        setHelperText("Correct. Your score is " + (counter) + "/3 (" + (counter/3*100).toFixed(2) + "%)");
+        setValue(event.target.value);
+        setHelperText(' ');
         setError(false);
-      } else {
-        setHelperText('Incorrect');
-        setError(true);
-      }
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (value === 'True' || value === 'Dangling participle' || value === 'their') {
+            counter++;
+            setHelperText("Correct. Your score is " + (counter) + "/3 (" + (counter / 3 * 100).toFixed(2) + "%)");
+            setError(false);
+        } else {
+            setHelperText('Incorrect');
+            setError(true);
+        }
     };
 
     return (
         <StyledGrid>
-      <form onSubmit={handleSubmit}>
-        <FormControl component="fieldset" error={error} className={classes.formControl}>
-          <FormLabel component="question-label" className={classes.formControl}>{props.number}. {props.name} </FormLabel>
-          <FormHelperText className={classes.helperText}>{helperText}</FormHelperText>
+            <form onSubmit={handleSubmit}>
+                <FormControl component="fieldset" error={error} className={classes.formControl}>
+                    <FormLabel component="question-label" className={classes.formControl}>{props.number}. {props.name} </FormLabel>
+                    <FormHelperText className={classes.helperText}>{helperText}</FormHelperText>
 
-          <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-            {Object.keys(options).map((key) => {
-               return (
-                   <>       
-                    <StyledFormControlLabel value={options[key]}  control={<Radio />} label={options[key]} />
-                </>
-               );
-           })
-       }
-          </RadioGroup>
-        </FormControl>
-        <StyledButton type="submit" variant="outlined" color="primary">
-        Submit
+                    <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
+                        {Object.keys(options).map((key) => {
+                            return (
+                                <>
+                                    <StyledFormControlLabel value={options[key]} control={<Radio />} label={options[key]} />
+                                </>
+                            );
+                        })
+                        }
+                    </RadioGroup>
+                </FormControl>
+                <StyledButton type="submit" variant="outlined" color="primary">
+                    Submit
         </StyledButton>
-      </form>
-      <br></br>
-      </StyledGrid>
+            </form>
+            <br></br>
+        </StyledGrid>
     );
-  }
+}
 
