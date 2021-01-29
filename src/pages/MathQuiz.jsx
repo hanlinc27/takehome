@@ -24,30 +24,29 @@ export function MathQuiz() {
     const [title, setTitle] = useState(0);
 
     useEffect(() => {
-        axios.get (
+        axios.get(
             `http://localhost:3000/api/quizzes/math`
         )
-        .then((response)=> {
-            setQuestions(response.data.questions);
-            setTitle(response.data.title);
-        }).catch(err => console.error(err));
+            .then((response) => {
+                setQuestions(response.data.questions);
+                setTitle(response.data.title);
+            }).catch(err => console.error(err));
     }, []);
-            return (
-                <>
-                                <StyledReturn href="/">Return Home</StyledReturn>
+    return (
+        <>
+            <StyledReturn href="/">Return Home</StyledReturn>
 
-                <Title name={title}></Title>
-                  {Object.keys(questions).map((key, i) => {
-                      console.log(questions[key].id.charAt(questions[key].id.length-1));
-                      return(
-                      <MathQuestion key={i}
-                      number={i+1} 
-                      name={questions[key].text} 
-                      options = {questions[key].options}
-                      ></MathQuestion>
-                      );
-                      
-                  })}
-                </>
-              );
+            <Title name={title}></Title>
+            {Object.keys(questions).map((key, i) => {
+                return (
+                    <MathQuestion key={i}
+                        number={i + 1}
+                        name={questions[key].text}
+                        options={questions[key].options}
+                    ></MathQuestion>
+                );
+
+            })}
+        </>
+    );
 }
